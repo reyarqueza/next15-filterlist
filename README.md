@@ -18,7 +18,87 @@ First, force install the dependencies to make the React 19 Beta work:
 npm install --force
 ```
 
-Then, run the development server:
+## Vercel Storage Postgres Setup
+
+1. Create a postgres database: Home > Storage > Create Database:
+
+![](readme/vercel-create-postgres.png)
+
+2. Name your database:
+
+<img src="readme/vercel-database-name.png" width="428" />
+
+3. Copy Snippet from the tab **.env.local**
+
+![](readme/vercel-env-local.png)
+
+4. Paste this in your .env file.
+
+5. in the .env file rename the **POSTGRES_URL** variable:
+
+```
+POSTGRES_URL="postgres://default...
+POSTGRES_PRISMA_URL="postgres://default...
+```
+
+to **DATABASE_URL**
+
+```
+DATABASE_URL="postgres://default...
+POSTGRES_PRISMA_URL="postgres://default...
+```
+
+## Prisma Setup
+
+Run these scripts:
+
+1. Create the tables with: npm run prisma.migrate
+
+```bash
+next15-filterlist$ npm run prisma.migrate
+
+> nextjs-filterlist@0.1.0 prisma.migrate
+> npx prisma migrate dev
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": PostgreSQL database "verceldb", schema "public" at "...edited..."
+
+Applying migration `20241102184319_migrations_postgresql`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20241102184319_migrations_postgresql/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+
+✔ Generated Prisma Client (v5.21.1) to ./node_modules/@prisma/client in 216ms
+```
+
+2. Seed prisma/seed.ts for initial data with npm run prisma.seed
+
+```bash
+next15-filterlist$ npm run prisma.seed
+
+> nextjs-filterlist@0.1.0 prisma.seed
+> npx prisma db seed
+
+Environment variables loaded from .env
+Running seed command `ts-node prisma/seed.ts` ...
+[SEED] Succussfully create project records
+[SEED] Succussfully create teamMember records
+[SEED] Succussfully create category records
+[SEED] Successfully created task records
+
+🌱  The seed command has been executed.
+shogo@miyasato:next15-filterlist$
+```
+
+## Dev
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -29,32 +109,6 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Prisma Setup
-
-You need decide between prisma local development with `sqlite` or a real database with for example `sqlserver`. Define it in the `schema.prisma` file.
-
-Consider adding a `.env` file to the root of the project and using these inside `schema.prisma` with `env("DATABASE_URL")`, refer to `.env.sample`.
-
-After switching, delete the `prisma/migrations` folder before running the migration command.
-
-When using sqlserver, you need to migrate the database schema with:
-
-```bash
-npm run prisma.migrate
-```
-
-When using sqllite, initialize with:
-
-```bash
-npm run prisma.push
-```
-
-Seed prisma/seed.ts for initial data:
-
-```sh
-npm run prisma.seed
-```
 
 ## Learn More
 
@@ -70,4 +124,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
