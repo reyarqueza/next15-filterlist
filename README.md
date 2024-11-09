@@ -10,6 +10,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+> This was presented at Next.js CONF24:
+> [React Server Components: Elevating speed, interactivity, and user experience (Aurora Scharff)](https://www.youtube.com/watch?v=CvAySC5ex9c)
+
 ## Getting Started
 
 First, force install the dependencies to make the React 19 Beta work:
@@ -18,7 +21,7 @@ First, force install the dependencies to make the React 19 Beta work:
 npm install --force
 ```
 
-## Vercel Storage Postgres Setup
+## Vercel Postgres Setup
 
 1. Create a postgres database: Home > Storage > Create Database:
 
@@ -52,7 +55,7 @@ POSTGRES_PRISMA_URL="postgres://default...
 
 Run these scripts:
 
-1. Create the tables with: npm run prisma.migrate
+1. Create the tables with the command: **npm run prisma.migrate**
 
 ```bash
 next15-filterlist$ npm run prisma.migrate
@@ -77,7 +80,7 @@ Your database is now in sync with your schema.
 ✔ Generated Prisma Client (v5.21.1) to ./node_modules/@prisma/client in 216ms
 ```
 
-2. Seed prisma/seed.ts for initial data with npm run prisma.seed
+2. Seed the data with the command: **npm run prisma.seed**
 
 ```bash
 next15-filterlist$ npm run prisma.seed
